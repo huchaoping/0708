@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <table>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+
+            </tr>
+
+            <tr v-for="stu in students">
+                <td>{{stu.sid}}</td>
+                <td>{{stu.sname}}</td>
+                <td>{{stu.sage}}</td>
+
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                students: ""
+            },
+            created() {
+                //请求Serlvet获取学生数据
+                axios.get
+                    (" http://localhost:8080/day707_war_exploded/studentServlet").then(obj => {
+
+                        this.students = obj.data;
+                    });
+
+            }
+        });
+
+    </script>
+</body>
+
+</html>
